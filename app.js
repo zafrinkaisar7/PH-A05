@@ -1,5 +1,3 @@
-//javascript codes and functionalities
-
 const services = [
   { nameBn: "জাতীয় জরুরি সেবা", nameEn: "National Emergency", number: "999", category: "সার্বজনীন", icon: "assets/emergency.png" },
   { nameBn: "পুলিশ", nameEn: "Police", number: "999", category: "পুলিশ", icon: "assets/police.png" },
@@ -13,7 +11,6 @@ const services = [
 ];
 
 // Initial counts
-
 let heartCount = 0;
 let coinCount = 100;
 let copyCount = 0;
@@ -24,44 +21,48 @@ const historyList = document.getElementById("historyList");
 // Render cards
 function renderCards() {
   cardContainer.innerHTML = "";
-  services.forEach((s, index) => {
+  services.forEach((s) => {
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-      <div class="flex justify-between">
+      <!-- Top Section -->
+      <div class="flex justify-between items-start">
         <div class="flex items-center gap-2">
-          <img src="${s.icon}" class="w-8 h-8">
+          <img src="${s.icon}" alt="${s.nameEn}" class="w-8 h-8">
         </div>
-        <button class="heart-btn">🤍</button>
+        <button class="heart-btn text-xl">♡</button>
       </div>
-      <div class="my-2">
+
+      <!-- Middle Section -->
+      <div class="mt-3 mb-4">
         <h3>${s.nameBn}</h3>
         <p>${s.nameEn}</p>
-        <p class="font-bold">${s.number}</p>
-        <span class="inline-block bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">${s.category}</span>
+        <p class="text-lg font-bold text-gray-900">${s.number}</p>
+        <span class="inline-block mt-1 bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">${s.category}</span>
       </div>
-      <div class="flex gap-2 mt-2">
-        <button class="copy-btn">📋 Copy</button>
-        <button class="call-btn">📞 Call</button>
+
+      <!-- Bottom Buttons -->
+      <div class="flex gap-3">
+        <button class="copy-btn flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-1.5 rounded-md text-sm font-medium">⧉ Copy</button>
+        <button class="call-btn flex-1 bg-green-600 hover:bg-green-700 text-white py-1.5 rounded-md text-sm font-medium">📞 Call</button>
       </div>
     `;
 
-    // Heart
+    // Heart Button
     card.querySelector(".heart-btn").addEventListener("click", () => {
       heartCount++;
       document.getElementById("heartCount").textContent = heartCount;
     });
 
-    // Copy
+    // Copy Button
     card.querySelector(".copy-btn").addEventListener("click", () => {
       navigator.clipboard.writeText(s.number);
-      alert(`Copied: ${s.number}`);
       copyCount++;
       document.getElementById("copyCount").textContent = copyCount;
     });
 
-    // Call
+    // Call Button
     card.querySelector(".call-btn").addEventListener("click", () => {
       if (coinCount < 20) {
         alert("Not enough coins!");
@@ -69,10 +70,15 @@ function renderCards() {
       }
       coinCount -= 20;
       document.getElementById("coinCount").textContent = coinCount;
+
       const time = new Date().toLocaleTimeString();
-      alert(`Calling ${s.nameEn} at ${s.number}`);
       const li = document.createElement("li");
-      li.textContent = `${s.nameBn} (${s.number}) - ${time}`;
+      li.className = "history-item";
+      li.innerHTML = `
+        <span>${s.nameBn}</span>
+        <span class="number">${s.number}</span>
+        <span class="time">${time}</span>
+      `;
       historyList.prepend(li);
     });
 
@@ -86,4 +92,3 @@ renderCards();
 document.getElementById("clearHistory").addEventListener("click", () => {
   historyList.innerHTML = "";
 });
-
