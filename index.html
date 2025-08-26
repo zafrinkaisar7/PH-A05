@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Service</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
-</body>
-</html>
+<body class="bg-[#f2fbf7]">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center bg-white shadow px-6 py-3">
+    <div class="flex items-center gap-2">
+      <img src="assets/logo.png" alt="logo" class="w-8 h-8">
+      <span class="font-bold text-lg text-red-600">Emergency Service</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1">
+        <span class="text-red-600">❤️</span>
+        <span id="heartCount">0</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <img src="assets/coin.png" class="w-5 h-5">
+        <span id="coinCount">100</span>
+      </div>
+      <button class="bg-yellow-400 text-sm font-semibold px-3 py-1 rounded-full">
+        <span id="copyCount">0</span> Copy
+      </button>
+    </div>
+  </nav>
+
