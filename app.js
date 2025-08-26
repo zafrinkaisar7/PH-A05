@@ -57,28 +57,48 @@ function renderCards() {
 
     // Copy Button
     card.querySelector(".copy-btn").addEventListener("click", () => {
+      // Copy the hotline number to the clipboard
       navigator.clipboard.writeText(s.number);
+
+      // Show an alert confirming the copy action
+      alert(`Hotline number ${s.number} copied to clipboard!`);
+
+      // Increment the copy count and update the display
       copyCount++;
       document.getElementById("copyCount").textContent = copyCount;
     });
 
     // Call Button
     card.querySelector(".call-btn").addEventListener("click", () => {
+      // Check if coins are sufficient
       if (coinCount < 20) {
-        alert("Not enough coins!");
+        alert("Not enough coins to make a call!");
         return;
       }
+
+      // Deduct coins and update the display
       coinCount -= 20;
       document.getElementById("coinCount").textContent = coinCount;
 
+      // Show an alert with the service name and number
+      alert(`Calling ${s.nameEn} (${s.number})`);
+
+      // Get the current time
       const time = new Date().toLocaleTimeString();
+
+      // Create a new list item for the call history
       const li = document.createElement("li");
-      li.className = "history-item";
+      li.className = "bg-white shadow rounded-md p-3 history-item border border-gray-300";
       li.innerHTML = `
-        <span>${s.nameBn}</span>
-        <span class="number">${s.number}</span>
-        <span class="time">${time}</span>
+        <div class="flex-1">
+          <h4 class="font-semibold text-gray-800">${s.nameBn}</h4>
+          <p class="text-sm text-gray-600">${s.nameEn}</p>
+          <p class="text-sm text-gray-600"><span class="font-bold">Number:</span> ${s.number}</p>
+          <p class="text-xs text-gray-500">${time}</p>
+        </div>
       `;
+
+      // Add the new call record to the top of the call history
       historyList.prepend(li);
     });
 

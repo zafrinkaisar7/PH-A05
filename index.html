@@ -47,14 +47,16 @@
     </div>
 
     <!-- History Section -->
-    <div class="w-full lg:w-1/4 bg-white shadow rounded-lg p-4">
-      <div class="flex justify-between items-center mb-3">
-        <h2 class="font-semibold flex items-center gap-1">📞 Call History</h2>
-        <button id="clearHistory" class="bg-green-600 text-white text-sm px-3 py-1 rounded">Clear</button>
-      </div>
-      <ul id="historyList" class="space-y-2 text-sm max-h-[400px] overflow-y-auto"></ul>
-    </div>
-  </main>
+<div class="w-full lg:w-1/4 bg-white shadow rounded-lg p-4">
+  <div class="flex justify-between items-center mb-3">
+    <h2 class="font-semibold flex items-center gap-1">📞 Call History</h2>
+    <button id="clearHistory" class="bg-green-600 text-white text-sm px-3 py-1 rounded">Clear</button>
+  </div>
+  <ul id="historyList" class="space-y-2 text-sm max-h-[400px] overflow-y-auto">
+    <!-- Each history will be injected here as a card -->
+  </ul>
+</div>
+</main>
 
   <script src="app.js"></script>
 </body>
